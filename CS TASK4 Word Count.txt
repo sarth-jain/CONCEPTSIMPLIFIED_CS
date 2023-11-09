@@ -1,0 +1,44 @@
+//TASK4 --> Word Count
+
+/* Develop a program that counts the number of words in a given
+text file. Prompt the user to enter the file name and display the
+total word count. */
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+
+using namespace std;
+
+int main() {
+    string filename;
+    cout << "Enter the name of the text file: ";
+    cin >> filename;
+
+    ifstream inputFile(filename.c_str());       //giving input to the created the file
+
+/* If the file name is wrong or cannot be found. The file should be present in the BIN folder of IF TURBOC3 is installed then only it will open and give the output(word count) */
+    
+    if (!inputFile) {
+        cerr << "Error: Cannot open file " << filename << endl;
+        return 1;
+    }
+
+    string line;
+    int wordCount = 0;
+
+    while (getline(inputFile, line)) {
+        stringstream ss(line);
+        string word;
+        while (ss >> word) {
+            wordCount++;        //incrementing the count of words
+        }
+    }
+
+    inputFile.close();
+
+    cout << "Total word count in the file: " << wordCount << endl;
+
+    return 0;
+}
